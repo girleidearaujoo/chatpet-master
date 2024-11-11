@@ -45,11 +45,11 @@ const styles = StyleSheet.create({
 
 // Dados do post (agora usando as imagens importadas)
 const posts = [
-  { legenda: 'Teste 1', img: require("/home/alunoifal/Downloads/chatpet-master/assets/gatinhos.jpg"), user: 'analele', avatar: require( "/home/alunoifal/Downloads/chatpet-master/assets/analele.avif") },
-  { legenda: 'Teste 2', img: require("/home/alunoifal/Downloads/chatpet-master/assets/gato-de-peruca.jpg"), user: 'vitinho', avatar: require("/home/alunoifal/Downloads/chatpet-master/assets/vitinho.avif")},
-  { legenda: 'Teste 3', img: require("/home/alunoifal/Downloads/chatpet-master/assets/gato-emo.jpg"), user: 'ellen', avatar: require("/home/alunoifal/Downloads/chatpet-master/assets/ellen.avif") },
-  { legenda: 'Teste 4', img: require("/home/alunoifal/Downloads/chatpet-master/assets/images.jpeg"), user: 'gigi', avatar: require("/home/alunoifal/Downloads/chatpet-master/assets/gigi.jpeg") },
-  { legenda: 'Teste 5', img: require("/home/alunoifal/Downloads/chatpet-master/assets/periquito.jpg"), user: 'darline', avatar: require("/home/alunoifal/Downloads/chatpet-master/assets/darline.avif")},
+  { legenda: 'Gatinhos para a doação, os dois bem cuidados, interessados entrar em contato, o número está na bio.', img: require("../assets/gatinhos.jpg"), user: 'analele', avatar: require( "../assets/analele.png") },
+  { legenda: 'Meu fofinho de peruca kkkkkk', img: require("../assets/gato-de-peruca.jpg"), user: 'vitinho', avatar: require("../assets/vitinho.png")},
+  { legenda: 'É emo ele oia kakakak', img: require("../assets/gato-emo.jpg"), user: 'ellen', avatar: require("../assets/ellen.png") },
+  { legenda: 'Beissola na sua tela kkkkk', img: require("../assets/images.jpeg"), user: 'gigi', avatar: require("../assets/gigi.png") },
+  { legenda: 'Meus denguinhossss', img: require("../assets/periquito.jpg"), user: 'darline', avatar: require("../assets/darline.png")},
 ];
 
 // Funções de Navegação
@@ -90,7 +90,7 @@ const TimeLine = () => {
     <View style={styles.postContainer}>
       {/* Alinha avatar e nome do usuário horizontalmente */}
       <View style={styles.userContainer}>
-        <Avatar.Image size={10} source={{ uri: avatar }} />
+        <Avatar.Image size={50} source={avatar} />
         <Text style={styles.usernameText}>{user}</Text>
       </View>
   
@@ -122,6 +122,7 @@ const TimeLine = () => {
       </View>
     </View>
   );
+  
 
   return (
     <View style={styles.container}>
