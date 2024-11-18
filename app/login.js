@@ -48,7 +48,7 @@ export default function Login(){
     <TextInput value = {Password} onChangeText = {setPassword} style = {{borderWidth: 1, borderColor: "#FF8247", fontFamily: "KiwiMaru_400Regular" }}  placeholder = "Digite sua senha..." 
     placeholderTextColor = "#A0522D" secureTextEntry={true} autoCapitalize="none"/>
     </View>
-    <View style= {{padding:10, fontFamily:"KiwiMaru_400Regular"}}>
+    <View style= {{padding:2, fontFamily:"KiwiMaru_400Regular"}}>
     <Button title = "Login" onPress={handleLogin} color={"#A0522D"} />
     <Button title = "Cadastrar" onPress={() => router.navigate('/cadastro')} color={"#A0522D"} />
     </View>

@@ -1,7 +1,8 @@
 import React from "react";
-import { FlatList, View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, } from "react-native";
+import { FlatList, View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { BottomNavigation, Avatar } from 'react-native-paper';
-import { MaterialCommunityIcons } from '@expo/vector-icons';  // Para os ícones personalizados
+import { MaterialCommunityIcons } from '@expo/vector-icons';  
+import { useRouter } from 'expo-router'; // Para navegação com Expo Router
 
 // Estilos
 const styles = StyleSheet.create({
@@ -14,12 +15,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   userContainer: {
-    flexDirection: 'row',  // Alinha o avatar e o nome do usuário na horizontal
+    flexDirection: 'row', 
     alignItems: 'center',
     marginBottom: 10,
   },
   usernameText: {
-    marginLeft: 10, // Espaçamento entre o avatar e o nome
+    marginLeft: 10,
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     borderRadius: 30,
-    alignSelf: 'center', // Centraliza a imagem
+    alignSelf: 'center',
   },
   actionsContainer: {
     flexDirection: 'row',
@@ -38,17 +39,27 @@ const styles = StyleSheet.create({
   icon: {
     marginHorizontal: 10,
   },
+  fixedButton: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#007bff',
+    borderRadius: 50,
+    elevation: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
 });
 
-
-
-
-// Dados do post (agora usando as imagens importadas)
+// Dados do post
 const posts = [
   { legenda: 'Gatinhos para a doação, os dois bem cuidados, interessados entrar em contato, o número está na bio.', img: require("../assets/gatinhos.jpg"), user: 'analele', avatar: require( "../assets/analele.png") },
   { legenda: 'Meu fofinho de peruca kkkkkk', img: require("../assets/gato-de-peruca.jpg"), user: 'vitinho', avatar: require("../assets/vitinho.png")},
   { legenda: 'É emo ele oia kakakak', img: require("../assets/gato-emo.jpg"), user: 'ellen', avatar: require("../assets/ellen.png") },
-  { legenda: 'Beissola na sua tela kkkkk', img: require("../assets/images.jpeg"), user: 'gigi', avatar: require("../assets/gigi.png") },
+  { legenda: 'Beiçola na sua tela kkkkk', img: require("../assets/images.jpeg"), user: 'gigi', avatar: require("../assets/gigi.png") },
   { legenda: 'Meus denguinhossss', img: require("../assets/periquito.jpg"), user: 'darline', avatar: require("../assets/darline.png")},
 ];
 
@@ -66,7 +77,9 @@ const TimeLine = () => {
     { key: 'recents', title: 'Recents', focusedIcon: 'history' },
     { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
   ]);
-
+  
+  const router = useRouter(); // Usa o hook do Expo Router
+  
   const renderScene = BottomNavigation.SceneMap({
     music: MusicRoute,
     albums: AlbumsRoute,
@@ -74,65 +87,35 @@ const TimeLine = () => {
     notifications: NotificationsRoute,
   });
 
-  // Estados para Curtir e Salvar
-  const [likes, setLikes] = React.useState({});
-  const [saved, setSaved] = React.useState({});
-
-  const toggleLike = (user) => {
-    setLikes(prev => ({ ...prev, [user]: !prev[user] }));
-  };
-
-  const toggleSave = (user) => {
-    setSaved(prev => ({ ...prev, [user]: !prev[user] }));
-  };
-
   const Itens = ({ avatar, img, legenda, user }) => (
     <View style={styles.postContainer}>
-      {/* Alinha avatar e nome do usuário horizontalmente */}
       <View style={styles.userContainer}>
         <Avatar.Image size={50} source={avatar} />
         <Text style={styles.usernameText}>{user}</Text>
       </View>
-  
-      {/* Exibição da imagem do post */}
+
       <Image source={img} style={styles.image} />
       <Text>{legenda}</Text>
-      
-      {/* Ações abaixo do post */}
-      <View style={styles.actionsContainer}>
-        {/* Ícone de Curtir */}
-        <TouchableOpacity onPress={() => toggleLike(user)}>
-          <MaterialCommunityIcons
-            name={likes[user] ? 'heart' : 'heart-outline'}
-            size={24}
-            color="red"
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-  
-        {/* Ícone de Salvar */}
-        <TouchableOpacity onPress={() => toggleSave(user)}>
-          <MaterialCommunityIcons
-            name={saved[user] ? 'bookmark' : 'bookmark-outline'}
-            size={24}
-            color="black"
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-      </View>
     </View>
   );
-  
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <FlatList
-          data={posts}
-          renderItem={({ item }) => <Itens {...item} />}
-          keyExtractor={item => item.user}
-        />
-      </ScrollView>
+      <FlatList
+        data={posts}
+        renderItem={({ item }) => <Itens {...item} />}
+        keyExtractor={item => item.user}
+      />
+
+      {/* Botão fixo */}
+      <TouchableOpacity 
+        style={styles.fixedButton} 
+        onPress={() => router.push('/list')} // Rota configurada no Expo Router
+      >
+        <Text style={styles.buttonText}>Serviços</Text>
+      </TouchableOpacity>
+
+      {/* Navegação inferior */}
       <BottomNavigation
         navigationState={{ index, routes }}
         onIndexChange={setIndex}
@@ -143,4 +126,3 @@ const TimeLine = () => {
 };
 
 export default TimeLine;
-
