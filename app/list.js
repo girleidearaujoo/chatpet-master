@@ -86,8 +86,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomWidth: 5,
+    borderBottomColor: '#efb8a4',
+    backgroundColor: "#fde6de",
   },
   image: {
     width: 50,
