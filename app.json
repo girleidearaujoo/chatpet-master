@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "scheme": "my-app",
     "orientation": "portrait",
+    "newArchEnabled": true,
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
