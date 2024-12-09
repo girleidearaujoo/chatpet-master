@@ -2,12 +2,10 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import {useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Login from './login'
 import {
-  KiwiMaru_300Light,
   KiwiMaru_400Regular,
-  KiwiMaru_500Medium,
 } from '@expo-google-fonts/kiwi-maru';
 
 SplashScreen.preventAutoHideAsync();
